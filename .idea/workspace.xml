@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cfb98bd6-eb99-4dbf-b1d9-0e005a56821e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/LibrarianController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/LibrarianController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/frogrilla/mcskinlibrarian/librarian-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frogrilla/mcskinlibrarian/librarian-view.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="cfb98bd6-eb99-4dbf-b1d9-0e005a56821e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
