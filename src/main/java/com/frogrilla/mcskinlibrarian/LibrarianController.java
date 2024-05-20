@@ -27,6 +27,8 @@ public class LibrarianController {
     private Label skinName;
     @FXML
     private ImageView modelImage;
+    @FXML
+    private ImageView skinImage;
 
     @FXML
     protected void onSelectFile() throws IOException {
@@ -113,7 +115,11 @@ public class LibrarianController {
 
         skinName.setText(skinListView.getItems().get(i));
         byte[] modelBytes = Base64.getDecoder().decode(customSkins.get(i).modelImage.replace("data:image/png;base64,", "").replace("\\u003d", ""));
-        Image image = new Image(new ByteArrayInputStream(modelBytes));
-        modelImage.setImage(image);
+        Image imageM = new Image(new ByteArrayInputStream(modelBytes));
+        modelImage.setImage(imageM);
+
+        byte[] skinBytes = Base64.getDecoder().decode(customSkins.get(i).skinImage.replace("data:image/png;base64,", "").replace("\\u003d", ""));
+        Image imageS = new Image(new ByteArrayInputStream(skinBytes));
+        skinImage.setImage(imageS);
     }
 }

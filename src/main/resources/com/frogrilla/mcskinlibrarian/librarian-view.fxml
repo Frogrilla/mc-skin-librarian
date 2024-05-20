@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 
 <BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frogrilla.mcskinlibrarian.LibrarianController">
   <padding>
@@ -33,9 +35,26 @@
                </ToolBar>
          </bottom>
          <center>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="modelImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="modelImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="4.0" scaleY="4.0">
+                     <effect>
+                        <DropShadow spread="0.2">
+                           <color>
+                              <Color opacity="0.4000000059604645" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </ImageView>
+                  <ImageView fx:id="skinImage" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0">
+                     <effect>
+                        <DropShadow spread="0.2">
+                           <color>
+                              <Color opacity="0.4000000059604645" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </ImageView>
                </children>
             </HBox>
          </center>
