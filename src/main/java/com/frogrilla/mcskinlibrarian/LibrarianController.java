@@ -2,8 +2,12 @@ package com.frogrilla.mcskinlibrarian;
 
 import javafx.fxml.FXML;
 import com.google.gson.*;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.stage.FileChooser;
 
 import java.io.*;
@@ -19,6 +23,10 @@ public class LibrarianController {
 
     @FXML
     private ListView<String> skinListView;
+    @FXML
+    private Label skinName;
+    @FXML
+    private ImageView modelImage;
 
     @FXML
     protected void onSelectFile() throws IOException {
@@ -34,7 +42,7 @@ public class LibrarianController {
         });
         customSkins.sort(new SkinDataComparator());
         skinListView.getItems().clear();
-        customSkins.forEach(skinData -> skinListView.getItems().add(skinData.name));
+        customSkins.forEach(skinData -> skinListView.getItems().add(Objects.equals(skinData.name, "") ? "<unnamed skin>" : skinData.name));
         reader.close();
 
         loaded = true;
@@ -64,7 +72,7 @@ public class LibrarianController {
 
     @FXML
     protected void onUpButton(){
-        if(!loaded) return;
+        //if(!loaded) return;
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i <= 0) return;
 
@@ -76,12 +84,13 @@ public class LibrarianController {
         skinListView.getItems().set(i-1, skinListView.getItems().get(i));
         skinListView.getItems().set(i, swappedName);
 
+        skinListView.scrollTo(i-1);
         skinListView.getSelectionModel().select(i-1);
     }
 
     @FXML
     protected void onDownButton(){
-        if(!loaded) return;
+        //if(!loaded) return;
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0 || i >= skinListView.getItems().size()-1) return;
 
@@ -92,6 +101,19 @@ public class LibrarianController {
         String swappedName = skinListView.getItems().get(i+1);
         skinListView.getItems().set(i+1, skinListView.getItems().get(i));
         skinListView.getItems().set(i, swappedName);
+
+        skinListView.scrollTo(i+1);
         skinListView.getSelectionModel().select(i+1);
+    }
+
+    @FXML
+    protected void onListClicked(){
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0) return;
+
+        skinName.setText(skinListView.getItems().get(i));
+        byte[] modelBytes = Base64.getDecoder().decode(customSkins.get(i).modelImage.replace("data:image/png;base64,", "").replace("\\u003d", ""));
+        Image image = new Image(new ByteArrayInputStream(modelBytes));
+        modelImage.setImage(image);
     }
 }

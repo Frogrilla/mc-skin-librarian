@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cfb98bd6-eb99-4dbf-b1d9-0e005a56821e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/LibrarianApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/LibrarianApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/LibrarianController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/LibrarianController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/SkinData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/frogrilla/mcskinlibrarian/SkinData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/frogrilla/mcskinlibrarian/librarian-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/frogrilla/mcskinlibrarian/librarian-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

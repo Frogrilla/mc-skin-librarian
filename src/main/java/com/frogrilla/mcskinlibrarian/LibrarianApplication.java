@@ -20,7 +20,7 @@ public class LibrarianApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(LibrarianApplication.class.getResource("librarian-view.fxml"));
 
         pStage = stage;
-        scene = new Scene(fxmlLoader.load(), 640, 480);
+        scene = new Scene(fxmlLoader.load(), 1280, 720);
         stage.setTitle("MC Skin Librarian");
         stage.setScene(scene);
         stage.show();
