@@ -1,5 +1,8 @@
 package com.frogrilla.mcskinlibrarian;
 
+import java.time.Instant;
+import java.util.Comparator;
+
 public class SkinData {
     public String capeId;
     public String created;
@@ -37,5 +40,12 @@ public class SkinData {
 
     public String toString(){
         return this.id;
+    }
+}
+
+class SkinDataComparator implements Comparator<SkinData> {
+    @Override
+    public int compare(SkinData a, SkinData b) {
+        return Instant.parse(b.created).compareTo(Instant.parse(a.created));
     }
 }
