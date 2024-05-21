@@ -6,6 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frogrilla.mcskinlibrarian.LibrarianController">
   <padding>
@@ -54,11 +55,17 @@
                <children>
                      <ToolBar fx:id="barBottom" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
                         <items>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#onDeleteButton" prefWidth="24.0" text="X" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                         <Pane fx:id="leftSpacer" layoutX="221.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="down" />
                            <Label fx:id="skinName" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="123.0" text="skin name" textAlignment="CENTER" textOverrun="CLIP" />
                            <Button mnemonicParsing="false" onAction="#onUpButton" text="up" />
                         <Pane fx:id="rightSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
+                        <Pane prefHeight="0.0" prefWidth="24.0" />
                         </items>
                      </ToolBar>
                </children>

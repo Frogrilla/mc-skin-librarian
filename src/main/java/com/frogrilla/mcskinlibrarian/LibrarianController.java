@@ -2,13 +2,10 @@ package com.frogrilla.mcskinlibrarian;
 
 import javafx.fxml.FXML;
 import com.google.gson.*;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -133,5 +130,21 @@ public class LibrarianController {
         byte[] skinBytes = Base64.getDecoder().decode(customSkins.get(i).skinImage.replace("data:image/png;base64,", "").replace("\\u003d", ""));
         Image imageS = new Image(new ByteArrayInputStream(skinBytes));
         skinImage.setImage(imageS);
+
+        modelImage.setVisible(true);
+        skinImage.setVisible(true);
+    }
+
+    @FXML
+    protected void onDeleteButton(){
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0) return;
+
+        customSkins.remove(i);
+        skinListView.getItems().remove(i);
+        skinListView.getSelectionModel().clearSelection();
+        skinName.setText("skin name");
+        modelImage.setVisible(false);
+        skinImage.setVisible(false);
     }
 }
