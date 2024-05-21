@@ -5,9 +5,13 @@ import com.google.gson.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 
 import java.io.*;
@@ -29,7 +33,15 @@ public class LibrarianController {
     private ImageView modelImage;
     @FXML
     private ImageView skinImage;
+    @FXML
+    private Pane rightSpacer;
+    @FXML
+    private Pane leftSpacer;
 
+    public void initialize() {
+        HBox.setHgrow(rightSpacer, Priority.SOMETIMES);
+        HBox.setHgrow(leftSpacer, Priority.SOMETIMES);
+    }
     @FXML
     protected void onSelectFile() throws IOException {
         FileChooser fileChooser = new FileChooser();

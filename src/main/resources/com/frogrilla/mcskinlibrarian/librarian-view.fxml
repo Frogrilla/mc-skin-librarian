@@ -25,19 +25,10 @@
       </left>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <bottom>
-               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                  <items>
-                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="down" />
-                     <Label fx:id="skinName" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="123.0" text="skin name" textAlignment="CENTER" textOverrun="CLIP" />
-                     <Button mnemonicParsing="false" onAction="#onUpButton" text="up" />
-                  </items>
-               </ToolBar>
-         </bottom>
          <center>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="300.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="modelImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="4.0" scaleY="4.0">
+                  <ImageView fx:id="modelImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" scaleX="12.0" scaleY="12.0">
                      <effect>
                         <DropShadow spread="0.2">
                            <color>
@@ -46,7 +37,7 @@
                         </DropShadow>
                      </effect>
                   </ImageView>
-                  <ImageView fx:id="skinImage" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0">
+                  <ImageView fx:id="skinImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" scaleX="7.0" scaleY="7.0">
                      <effect>
                         <DropShadow spread="0.2">
                            <color>
@@ -58,6 +49,21 @@
                </children>
             </HBox>
          </center>
+         <bottom>
+            <StackPane prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+               <children>
+                     <ToolBar fx:id="barBottom" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
+                        <items>
+                        <Pane fx:id="leftSpacer" layoutX="221.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
+                           <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="down" />
+                           <Label fx:id="skinName" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="123.0" text="skin name" textAlignment="CENTER" textOverrun="CLIP" />
+                           <Button mnemonicParsing="false" onAction="#onUpButton" text="up" />
+                        <Pane fx:id="rightSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
+                        </items>
+                     </ToolBar>
+               </children>
+            </StackPane>
+         </bottom>
       </BorderPane>
    </center>
 </BorderPane>
