@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import com.google.gson.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -25,7 +26,7 @@ public class LibrarianController {
     @FXML
     private ListView<String> skinListView;
     @FXML
-    private Label skinName;
+    private TextField skinName;
     @FXML
     private ImageView modelImage;
     @FXML
@@ -38,6 +39,13 @@ public class LibrarianController {
     public void initialize() {
         HBox.setHgrow(rightSpacer, Priority.SOMETIMES);
         HBox.setHgrow(leftSpacer, Priority.SOMETIMES);
+
+        skinName.textProperty().addListener((observable, a, b) -> {
+            int i = skinListView.getSelectionModel().getSelectedIndex();
+            if(i < 0) return;
+
+            skinListView.getItems().set(i, b);
+        });
     }
     @FXML
     protected void onSelectFile() throws IOException {
@@ -71,6 +79,7 @@ public class LibrarianController {
         customSkins.forEach(skin -> {
             int i = customSkins.indexOf(skin);
             skin.created = Instant.now().minusSeconds(i).toString();
+            skin.name = skinListView.getItems().get(i);
             skinDataMap.add(skin.id, gson.toJsonTree(skin));
         });
 
@@ -103,7 +112,7 @@ public class LibrarianController {
     protected void onDownButton(){
         //if(!loaded) return;
         int i = skinListView.getSelectionModel().getSelectedIndex();
-        if(i < 0 || i >= skinListView.getItems().size()-1) return;
+        if(i < 0) return;
 
         SkinData swappedData = customSkins.get(i+1);
         customSkins.set(i+1, customSkins.get(i));
@@ -133,6 +142,7 @@ public class LibrarianController {
 
         modelImage.setVisible(true);
         skinImage.setVisible(true);
+        skinName.setDisable(false);
     }
 
     @FXML
@@ -143,8 +153,9 @@ public class LibrarianController {
         customSkins.remove(i);
         skinListView.getItems().remove(i);
         skinListView.getSelectionModel().clearSelection();
-        skinName.setText("skin name");
+        skinName.setText("");
         modelImage.setVisible(false);
         skinImage.setVisible(false);
+        skinName.setDisable(true);
     }
 }

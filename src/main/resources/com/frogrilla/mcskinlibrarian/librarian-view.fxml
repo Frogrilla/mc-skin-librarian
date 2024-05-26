@@ -62,7 +62,7 @@
                         </Button>
                         <Pane fx:id="leftSpacer" layoutX="221.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="down" />
-                           <Label fx:id="skinName" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="123.0" text="skin name" textAlignment="CENTER" textOverrun="CLIP" />
+                        <TextField fx:id="skinName" disable="true" promptText="skin name" />
                            <Button mnemonicParsing="false" onAction="#onUpButton" text="up" />
                         <Pane fx:id="rightSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
                         <Pane prefHeight="0.0" prefWidth="24.0" />
