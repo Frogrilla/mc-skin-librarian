@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.frogrilla'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
   mavenCentral()
@@ -26,7 +26,7 @@ tasks.withType(JavaCompile) {
 
 application {
   mainModule = 'com.frogrilla.mcskinlibrarian'
-  mainClass = 'com.frogrilla.mcskinlibrarian.LibrarianApplication'
+  mainClass = 'com.frogrilla.mcskinlibrarian.Launcher'
 }
 
 javafx {
@@ -53,14 +53,15 @@ dependencies {
 test {
 useJUnitPlatform()}
 
-jlink {
-  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
-  options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-  launcher {
-    name = 'app'
-  }
-}
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
-jlinkZip {
-  group = 'distribution'
+  manifest {
+    attributes(
+            'Main-Class': 'com.frogrilla.mcskinlibrarian.Launcher'
+    )
+  }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
