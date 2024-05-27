@@ -22,7 +22,7 @@
          </ToolBar>
       </top>
       <left>
-         <ListView fx:id="skinListView" maxHeight="1.7976931348623157E308" maxWidth="200.0" onMousePressed="#onListClicked" prefHeight="0.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         <ListView fx:id="skinListView" maxHeight="1.7976931348623157E308" maxWidth="200.0" prefHeight="0.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
       </left>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">

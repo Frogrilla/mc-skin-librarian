@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -46,6 +47,10 @@ public class LibrarianController {
 
             skinListView.getItems().set(i, b);
         });
+
+        skinListView.getSelectionModel().selectedIndexProperty().addListener((observable, a, b) -> {
+            updateView();
+        });
     }
     @FXML
     protected void onSelectFile() throws IOException {
@@ -65,11 +70,6 @@ public class LibrarianController {
         reader.close();
 
         loaded = true;
-    }
-
-    @FXML
-    protected void onOrderButton() {
-        Collections.shuffle(customSkins);
     }
 
     @FXML
@@ -127,9 +127,28 @@ public class LibrarianController {
     }
 
     @FXML
-    protected void onListClicked(){
+    protected void onDeleteButton(){
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
+
+        customSkins.remove(i);
+        skinListView.getItems().remove(i);
+        skinListView.getSelectionModel().clearSelection();
+        skinName.setText("");
+        modelImage.setVisible(false);
+        skinImage.setVisible(false);
+        skinName.setDisable(true);
+    }
+
+    public void updateView(){
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0){
+            skinName.setText("");
+            modelImage.setVisible(false);
+            skinImage.setVisible(false);
+            skinName.setDisable(true);
+            return;
+        }
 
         skinName.setText(skinListView.getItems().get(i));
         byte[] modelBytes = Base64.getDecoder().decode(customSkins.get(i).modelImage.replace("data:image/png;base64,", "").replace("\\u003d", ""));
@@ -145,17 +164,10 @@ public class LibrarianController {
         skinName.setDisable(false);
     }
 
-    @FXML
-    protected void onDeleteButton(){
-        int i = skinListView.getSelectionModel().getSelectedIndex();
-        if(i < 0) return;
-
-        customSkins.remove(i);
-        skinListView.getItems().remove(i);
-        skinListView.getSelectionModel().clearSelection();
-        skinName.setText("");
-        modelImage.setVisible(false);
-        skinImage.setVisible(false);
-        skinName.setDisable(true);
+    public void processKeyPress(KeyCode key){
+        switch(key){
+            case Q -> onUpButton();
+            case E -> onDownButton();
+        }
     }
 }
