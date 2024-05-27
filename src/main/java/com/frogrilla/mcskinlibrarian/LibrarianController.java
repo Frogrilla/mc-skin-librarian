@@ -1,5 +1,6 @@
 package com.frogrilla.mcskinlibrarian;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import com.google.gson.*;
 import javafx.scene.control.Label;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -45,7 +47,7 @@ public class LibrarianController {
             int i = skinListView.getSelectionModel().getSelectedIndex();
             if(i < 0) return;
 
-            skinListView.getItems().set(i, b);
+            if(!skinListView.getItems().get(i).equals(b)) skinListView.getItems().set(i, b);
         });
 
         skinListView.getSelectionModel().selectedIndexProperty().addListener((observable, a, b) -> {
@@ -112,7 +114,7 @@ public class LibrarianController {
     protected void onDownButton(){
         //if(!loaded) return;
         int i = skinListView.getSelectionModel().getSelectedIndex();
-        if(i < 0) return;
+        if(i < 0 || i >= skinListView.getItems().size()-1) return;
 
         SkinData swappedData = customSkins.get(i+1);
         customSkins.set(i+1, customSkins.get(i));
@@ -133,11 +135,27 @@ public class LibrarianController {
 
         customSkins.remove(i);
         skinListView.getItems().remove(i);
-        skinListView.getSelectionModel().clearSelection();
-        skinName.setText("");
-        modelImage.setVisible(false);
-        skinImage.setVisible(false);
-        skinName.setDisable(true);
+        skinListView.getSelectionModel().select(Math.min(i, skinListView.getItems().size()-1));
+
+        updateView();
+    }
+
+    @FXML
+    protected void onDupliacteButton(){
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0) return;
+
+        String duplicateName = skinListView.getItems().get(i);
+        if(!duplicateName.endsWith(" [duplicate]")){
+            duplicateName += " [duplicate]";
+        }
+
+        customSkins.add(i+1, customSkins.get(i));
+        customSkins.get(i+1).name = duplicateName;
+        skinListView.getItems().add(i+1, duplicateName);
+
+        skinListView.getSelectionModel().select(i+1);
+        updateView();
     }
 
     public void updateView(){
@@ -164,10 +182,23 @@ public class LibrarianController {
         skinName.setDisable(false);
     }
 
-    public void processKeyPress(KeyCode key){
-        switch(key){
+    public void processKeyPress(KeyEvent event){
+        switch(event.getCode()){
             case Q -> onUpButton();
             case E -> onDownButton();
+            case X ->{
+                if (event.isControlDown()) onDeleteButton();
+            }
+            case D -> {
+                if (event.isControlDown()) onDupliacteButton();
+            }
+            case ENTER -> {
+                if (skinName.isFocused()) skinListView.requestFocus();
+            }
+            case R -> {
+                if(event.isControlDown()) skinName.requestFocus();
+            }
+            default -> {}
         }
     }
 }
