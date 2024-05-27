@@ -60,12 +60,13 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onDupliacteButton" prefWidth="70.4" text="Duplicate" />
                         <Pane fx:id="leftSpacer" layoutX="221.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
                            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="down" />
                         <TextField fx:id="skinName" disable="true" promptText="skin name" />
                            <Button mnemonicParsing="false" onAction="#onUpButton" text="up" />
                         <Pane fx:id="rightSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
-                        <Pane prefHeight="0.0" prefWidth="24.0" />
+                        <Pane prefHeight="0.0" prefWidth="94.4" />
                         </items>
                      </ToolBar>
                </children>
