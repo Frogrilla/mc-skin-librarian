@@ -3,6 +3,9 @@ package com.frogrilla.mcskinlibrarian;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import com.google.gson.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -14,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.time.Instant;
@@ -23,6 +27,7 @@ public class LibrarianController {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private List<SkinData> customSkins = new ArrayList<>();
+    private List<SkinData> deletedSkins = new ArrayList<>();
     private File skinFile;
     private boolean loaded = false;
 
@@ -133,6 +138,7 @@ public class LibrarianController {
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
 
+        deletedSkins.add(customSkins.get(i));
         customSkins.remove(i);
         skinListView.getItems().remove(i);
         skinListView.getSelectionModel().select(Math.min(i, skinListView.getItems().size()-1));
@@ -145,17 +151,46 @@ public class LibrarianController {
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
 
+        SkinData rootData = customSkins.get(i);
+        SkinData cloneData = new SkinData();
+
         String duplicateName = skinListView.getItems().get(i);
         if(!duplicateName.endsWith(" [duplicate]")){
             duplicateName += " [duplicate]";
         }
 
-        customSkins.add(i+1, customSkins.get(i));
-        customSkins.get(i+1).name = duplicateName;
-        skinListView.getItems().add(i+1, duplicateName);
+        cloneData.name = duplicateName;
+        cloneData.textureId = "";
+        cloneData.skinImage = rootData.skinImage;
+        cloneData.modelImage = rootData.modelImage;
+        cloneData.slim = rootData.slim;
+        cloneData.updated = rootData.updated;
+        cloneData.created = rootData.created;
+        cloneData.capeId = rootData.capeId;
 
+        int nextID = 0;
+        for(int j = 0; j < customSkins.size()-1; j++){
+            SkinData skinData = customSkins.get(j);
+            String digits = skinData.id.substring(5);
+            try{
+                int num = Integer.parseInt(digits);
+                nextID = Math.max(nextID, num+1);
+            }
+            catch (NumberFormatException e){
+                continue;
+            }
+        }
+
+        cloneData.id = String.format("skin_%d", nextID);
+
+        customSkins.add(i+1, cloneData);
+        skinListView.getItems().add(i+1, duplicateName);
         skinListView.getSelectionModel().select(i+1);
         updateView();
+    }
+
+    @FXML
+    protected void onRecoverButton() {
     }
 
     public void updateView(){

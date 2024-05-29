@@ -21,9 +21,8 @@ public class LibrarianApplication extends Application {
         pStage = stage;
         scene = new Scene(root, 1280, 720);
         stage.setTitle("MC Skin Librarian");
-        scene.setOnKeyPressed(e -> controller.processKeyPress(e));
+        scene.setOnKeyPressed(controller::processKeyPress);
         stage.setScene(scene);
         stage.show();
-
     }
 }

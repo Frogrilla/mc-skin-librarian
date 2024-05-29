@@ -12,24 +12,12 @@
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
-      <top>
-         <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <items>
-
-              <Button onAction="#onSelectFile" text="Select File" />
-              <Button onAction="#onSaveButton" text="Save" />
-            </items>
-         </ToolBar>
-      </top>
-      <left>
-         <ListView fx:id="skinListView" maxHeight="1.7976931348623157E308" maxWidth="200.0" prefHeight="0.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-      </left>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="300.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="modelImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" scaleX="12.0" scaleY="12.0">
+                  <ImageView fx:id="modelImage" fitHeight="384.0" fitWidth="288.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
                      <effect>
                         <DropShadow spread="0.2">
                            <color>
@@ -74,4 +62,25 @@
          </bottom>
       </BorderPane>
    </center>
+   <top>
+      <StackPane prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+               <ToolBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
+                  <items>
+      
+                    <Button onAction="#onSelectFile" text="Select File" />
+                    <Button onAction="#onSaveButton" text="Save" />
+                  <Button layoutX="83.0" layoutY="12.0" onAction="#onRecoverButton" text="Recover" />
+                  </items>
+               </ToolBar>
+         </children>
+      </StackPane>
+   </top>
+   <left>
+      <StackPane prefHeight="0.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+               <ListView fx:id="skinListView" maxHeight="1.7976931348623157E308" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </StackPane>
+   </left>
 </BorderPane>
