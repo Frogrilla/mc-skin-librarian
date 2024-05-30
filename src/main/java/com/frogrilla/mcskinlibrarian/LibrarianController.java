@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.time.Instant;
 import java.util.*;
 
@@ -43,10 +44,13 @@ public class LibrarianController {
     private Pane rightSpacer;
     @FXML
     private Pane leftSpacer;
+    @FXML
+    private Pane topSpacer;
 
     public void initialize() {
         HBox.setHgrow(rightSpacer, Priority.SOMETIMES);
         HBox.setHgrow(leftSpacer, Priority.SOMETIMES);
+        HBox.setHgrow(topSpacer, Priority.SOMETIMES);
 
         skinName.textProperty().addListener((observable, a, b) -> {
             int i = skinListView.getSelectionModel().getSelectedIndex();
@@ -73,7 +77,7 @@ public class LibrarianController {
         });
         customSkins.sort(new SkinDataComparator());
         skinListView.getItems().clear();
-        customSkins.forEach(skinData -> skinListView.getItems().add(Objects.equals(skinData.name, "") ? "<unnamed skin>" : skinData.name));
+        customSkins.forEach(skinData -> skinListView.getItems().add(skinData.name));
         reader.close();
 
         loaded = true;
@@ -191,6 +195,32 @@ public class LibrarianController {
 
     @FXML
     protected void onRecoverButton() {
+    }
+
+    @FXML
+    protected void onModelButton() throws IOException {
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0) return;
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image", "*.png"));
+        File imageFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
+        customSkins.get(i).modelImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(Files.readAllBytes(imageFile.toPath())));
+
+        updateView();
+    }
+
+    @FXML
+    protected void onSkinButton() throws IOException {
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0) return;
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image", "*.png"));
+        File imageFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
+        customSkins.get(i).skinImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(Files.readAllBytes(imageFile.toPath())));
+
+        updateView();
     }
 
     public void updateView(){
