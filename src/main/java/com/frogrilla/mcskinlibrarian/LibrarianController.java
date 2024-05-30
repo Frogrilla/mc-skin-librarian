@@ -159,9 +159,9 @@ public class LibrarianController {
         SkinData cloneData = new SkinData();
 
         String duplicateName = skinListView.getItems().get(i);
-        if(!duplicateName.endsWith(" [duplicate]")){
-            duplicateName += " [duplicate]";
-        }
+//        if(!duplicateName.endsWith(" [duplicate]")){
+//            duplicateName += " [duplicate]";
+//        }
 
         cloneData.name = duplicateName;
         cloneData.textureId = "";
