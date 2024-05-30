@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.time.Instant;
 import java.util.*;
 
@@ -218,9 +220,12 @@ public class LibrarianController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image", "*.png"));
         File imageFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
-        customSkins.get(i).skinImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(Files.readAllBytes(imageFile.toPath())));
-
-        updateView();
+        byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
+        Image image = new Image(new ByteArrayInputStream(imageBytes));
+        if(image.getWidth() == 64 && (image.getHeight() == 32 || image.getHeight() == 64)){
+            customSkins.get(i).skinImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(imageBytes));
+            updateView();
+        }
     }
 
     public void updateView(){
