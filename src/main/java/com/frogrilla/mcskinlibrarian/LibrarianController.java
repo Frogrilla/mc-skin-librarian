@@ -65,6 +65,7 @@ public class LibrarianController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Custom skin JSON", "launcher_custom_skins.json"));
         skinFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
+        if(skinFile == null) return;
         BufferedReader reader = new BufferedReader(new FileReader(skinFile));
         JsonObject object = gson.fromJson(reader, JsonObject.class).getAsJsonObject("customSkins");
         customSkins.clear();
