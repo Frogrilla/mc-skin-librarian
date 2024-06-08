@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.frogrilla'
-version '1.1.0'
+version '1.2.0'
 
 repositories {
   mavenCentral()
@@ -42,6 +42,20 @@ dependencies {
   implementation('net.synedra:validatorfx:0.4.0') {
     exclude(group: 'org.openjfx')
   }
+
+  implementation group: 'org.openjfx', name: 'javafx-base', version: 21, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-base', version: 21, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-base', version: 21, classifier: 'linux'
+  implementation group: 'org.openjfx', name: 'javafx-controls', version: 21, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-controls', version: 21, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-controls', version: 21, classifier: 'linux'
+  implementation group: 'org.openjfx', name: 'javafx-fxml', version: 21, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-fxml', version: 21, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-fxml', version: 21, classifier: 'linux'
+  implementation group: 'org.openjfx', name: 'javafx-graphics', version: 21, classifier: 'win'
+  implementation group: 'org.openjfx', name: 'javafx-graphics', version: 21, classifier: 'mac'
+  implementation group: 'org.openjfx', name: 'javafx-graphics', version: 21, classifier: 'linux'
+
   implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
   implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="recover" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frogrilla.mcskinlibrarian.RecoverController">
+   <children>
+      <ToolBar prefHeight="40.0">
+        <items>
+          <Button mnemonicParsing="false" onAction="#addButton" text="Recover" />
+            <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#deleteButton" text="Delete Permenantly" />
+            <Button layoutX="72.0" layoutY="12.0" mnemonicParsing="false" onAction="#clearButton" text="Clear All" />
+        </items>
+      </ToolBar>
+      <ListView fx:id="recoverList" />
+   </children>
+</VBox>
