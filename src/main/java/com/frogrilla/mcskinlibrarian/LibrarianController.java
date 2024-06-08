@@ -89,6 +89,7 @@ public class LibrarianController {
             int i = customSkins.indexOf(skin);
             skin.created = Instant.now().minusSeconds(i).toString();
             skin.name = skinListView.getItems().get(i);
+            if(Objects.equals(skin.capeId, "")) skin.capeId = null;
             skinDataMap.add(skin.id, gson.toJsonTree(skin));
         });
 
@@ -151,7 +152,7 @@ public class LibrarianController {
     }
 
     @FXML
-    protected void onDupliacteButton(){
+    protected void onDuplicateButton(){
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
 
@@ -208,7 +209,6 @@ public class LibrarianController {
         stage.setOnHidden(recoverController::shutdown);
         recoverController.library = this;
         stage.setScene(scene);
-        stage.setAlwaysOnTop(true);
         stage.show();
     }
 
@@ -220,6 +220,7 @@ public class LibrarianController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image", "*.png"));
         File imageFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
+        if(imageFile == null) return;
         customSkins.get(i).modelImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(Files.readAllBytes(imageFile.toPath())));
 
         updateView();
@@ -233,12 +234,25 @@ public class LibrarianController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image", "*.png"));
         File imageFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
+        if(imageFile == null) return;
         byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
         Image image = new Image(new ByteArrayInputStream(imageBytes));
         if(image.getWidth() == 64 && (image.getHeight() == 32 || image.getHeight() == 64)){
             customSkins.get(i).skinImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(imageBytes));
             updateView();
         }
+    }
+
+    @FXML
+    protected void onShortcutButton() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("shortcut-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, 600, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Librarian Shorcuts");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void updateView(){
@@ -265,7 +279,7 @@ public class LibrarianController {
         skinName.setDisable(false);
     }
 
-    public void processKeyPress(KeyEvent event){
+    public void processKeyPress(KeyEvent event) {
         switch(event.getCode()){
             case Q -> onUpButton();
             case E -> onDownButton();
@@ -273,13 +287,31 @@ public class LibrarianController {
                 if (event.isControlDown()) onDeleteButton();
             }
             case D -> {
-                if (event.isControlDown()) onDupliacteButton();
+                if (event.isControlDown()) onDuplicateButton();
             }
             case ENTER -> {
                 if (skinName.isFocused()) skinListView.requestFocus();
             }
             case R -> {
                 if(event.isControlDown()) skinName.requestFocus();
+            }
+            case M -> {
+                if(event.isControlDown()){
+                    try{ onModelButton(); }
+                    catch (IOException ignored) {}
+                }
+            }
+            case N -> {
+                if(event.isControlDown()){
+                    try{ onSkinButton(); }
+                    catch (IOException ignored) {}
+                }
+            }
+            case S -> {
+                if(event.isControlDown()) {
+                    try{ onSaveButton(); }
+                    catch (IOException ignored) {}
+                }
             }
             default -> {}
         }

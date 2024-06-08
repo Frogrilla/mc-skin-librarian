@@ -50,7 +50,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDupliacteButton" prefWidth="70.4" text="Duplicate" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDuplicateButton" prefWidth="70.4" text="Duplicate" />
                            </children>
                            <BorderPane.margin>
                               <Insets left="10.0" right="10.0" />
@@ -95,6 +95,7 @@
                     <Button onAction="#onSaveButton" text="Save" />
                   <Pane fx:id="topSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
                   <Button layoutX="83.0" layoutY="12.0" onAction="#onRecoverButton" text="Recover" />
+                  <Button layoutX="132.0" layoutY="10.0" onAction="#onShortcutButton" text="Shortcuts" />
                   </items>
                </ToolBar>
          </children>

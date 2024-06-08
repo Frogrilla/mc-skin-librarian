@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frogrilla.mcskinlibrarian.ShortcutController">
+   <children>
+      <TabPane>
+         <tabs>
+            <Tab closable="false" text="Skin Librarian">
+                <content>
+                    <FlowPane fx:id="libraryTab" alignment="CENTER" columnHalignment="CENTER" hgap="50.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <children>
+                            <Label layoutX="48.0" layoutY="110.0" text="q : shift up" />
+                            <Label layoutX="88.0" layoutY="119.0" text="e : shift down" />
+                            <Label layoutX="128.0" layoutY="119.0" text="enter : focus on skin list" />
+                            <Label layoutX="53.0" layoutY="128.0" text="ctrl + r : rename" />
+                            <Label layoutX="73.0" layoutY="136.0" text="ctrl + d : duplicate" />
+                            <Label layoutX="67.0" layoutY="145.0" text="ctrl + x : delete" />
+                        <Label layoutX="244.0" layoutY="45.0" text="ctrl + s : save" />
+                        <Label layoutX="313.0" layoutY="45.0" text="ctrl + m : set model image" />
+                        <Label layoutX="140.0" layoutY="63.0" text="ctrl + n : set skin image" />
+                        </children>
+                    </FlowPane>
+                </content>
+            </Tab>
+            <Tab closable="false" text="Recover Skins">
+                <content>
+                    <FlowPane fx:id="recoverTab" alignment="CENTER" columnHalignment="CENTER" hgap="50.0" layoutX="10.0" layoutY="219.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <children>
+                            <Label layoutX="48.0" layoutY="110.0" text="e : recover" />
+                            <Label layoutX="88.0" layoutY="119.0" text="ctrl + x : delete" />
+                            <Label layoutX="124.0" layoutY="119.0" text="ctrl + c : clear" />
+                        </children>
+                    </FlowPane>
+                </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</VBox>
