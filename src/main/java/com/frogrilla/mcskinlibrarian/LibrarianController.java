@@ -85,13 +85,14 @@ public class LibrarianController {
     protected void onSaveButton() throws IOException {
         if(!loaded) return;
         JsonObject skinDataMap = new JsonObject();
-        customSkins.forEach(skin -> {
-            int i = customSkins.indexOf(skin);
+        for(int i = 0; i < customSkins.size(); i++){
+            SkinData skin = customSkins.get(i);
             skin.created = Instant.now().minusSeconds(i).toString();
             skin.name = skinListView.getItems().get(i);
             if(Objects.equals(skin.capeId, "")) skin.capeId = null;
+            skin.id = "skin_" + (i+1);
             skinDataMap.add(skin.id, gson.toJsonTree(skin));
-        });
+        };
 
         JsonObject skinObject = new JsonObject();
         skinObject.add("customSkins", skinDataMap);
@@ -173,20 +174,20 @@ public class LibrarianController {
         cloneData.created = rootData.created;
         cloneData.capeId = rootData.capeId;
 
-        int nextID = 0;
-        for(int j = 0; j < customSkins.size()-1; j++){
-            SkinData skinData = customSkins.get(j);
-            String digits = skinData.id.substring(5);
-            try{
-                int num = Integer.parseInt(digits);
-                nextID = Math.max(nextID, num+1);
-            }
-            catch (NumberFormatException e){
-                continue;
-            }
-        }
-
-        cloneData.id = String.format("skin_%d", nextID);
+//        int nextID = 0;
+//        for(int j = 0; j < customSkins.size()-1; j++){
+//            SkinData skinData = customSkins.get(j);
+//            String digits = skinData.id.substring(5);
+//            try{
+//                int num = Integer.parseInt(digits);
+//                nextID = Math.max(nextID, num+1);
+//            }
+//            catch (NumberFormatException e){
+//                continue;
+//            }
+//        }
+//
+//        cloneData.id = String.format("skin_%d", nextID);
 
         customSkins.add(i+1, cloneData);
         skinListView.getItems().add(i+1, duplicateName);
