@@ -29,13 +29,14 @@ import java.util.*;
 public class LibrarianController {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private List<SkinData> customSkins = new ArrayList<>();
-    private List<SkinData> deletedSkins = new ArrayList<>();
+    public List<SkinData> customSkins = new ArrayList<>();
+    public List<SkinData> deletedSkins = new ArrayList<>();
     private File skinFile;
     private boolean loaded = false;
+    public RecoverController recoverController;
 
     @FXML
-    private ListView<String> skinListView;
+    public ListView<String> skinListView;
     @FXML
     private TextField skinName;
     @FXML
@@ -43,15 +44,9 @@ public class LibrarianController {
     @FXML
     private ImageView skinImage;
     @FXML
-    private Pane rightSpacer;
-    @FXML
-    private Pane leftSpacer;
-    @FXML
     private Pane topSpacer;
 
     public void initialize() {
-        HBox.setHgrow(rightSpacer, Priority.SOMETIMES);
-        HBox.setHgrow(leftSpacer, Priority.SOMETIMES);
         HBox.setHgrow(topSpacer, Priority.SOMETIMES);
 
         skinName.textProperty().addListener((observable, a, b) -> {
@@ -144,6 +139,8 @@ public class LibrarianController {
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
 
+        if(recoverController != null && recoverController.open) recoverController.recoverList.getItems().add(skinListView.getItems().get(i));
+
         deletedSkins.add(customSkins.get(i));
         customSkins.remove(i);
         skinListView.getItems().remove(i);
@@ -196,7 +193,22 @@ public class LibrarianController {
     }
 
     @FXML
-    protected void onRecoverButton() {
+    protected void onRecoverButton() throws IOException {
+        if(recoverController != null && recoverController.open) return;
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("recover-view.fxml"));
+        Parent root = fxmlLoader.load();
+        recoverController = fxmlLoader.getController();
+        Scene scene = new Scene(root, 600, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Recover skins");
+        deletedSkins.forEach(skinData -> recoverController.recoverList.getItems().add(skinData.name));
+        scene.setOnKeyPressed(recoverController::processKeyPress);
+        stage.setOnHidden(recoverController::shutdown);
+        recoverController.library = this;
+        stage.setScene(scene);
+        stage.setAlwaysOnTop(true);
+        stage.show();
     }
 
     @FXML

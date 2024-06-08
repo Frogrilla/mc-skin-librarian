@@ -41,22 +41,45 @@
          <bottom>
             <StackPane prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
                <children>
-                     <ToolBar fx:id="barBottom" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0">
-                        <items>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#onDeleteButton" prefWidth="24.0" text="X" textFill="RED">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onDupliacteButton" prefWidth="70.4" text="Duplicate" />
-                        <Pane fx:id="leftSpacer" layoutX="221.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
-                           <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="down" />
-                        <TextField fx:id="skinName" disable="true" promptText="skin name" />
-                           <Button mnemonicParsing="false" onAction="#onUpButton" text="up" />
-                        <Pane fx:id="rightSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
-                        <Pane prefHeight="0.0" prefWidth="94.4" />
-                        </items>
-                     </ToolBar>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="180.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDeleteButton" prefWidth="24.0" text="X" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDupliacteButton" prefWidth="70.4" text="Duplicate" />
+                           </children>
+                           <BorderPane.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </BorderPane.margin>
+                        </HBox>
+                     </left>
+                     <center>
+                        <HBox alignment="CENTER" prefHeight="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                                 <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDownButton" text="↓" />
+                              <TextField fx:id="skinName" disable="true" promptText="skin name" />
+                                 <Button mnemonicParsing="false" onAction="#onUpButton" text="↑" />
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </HBox>
+                     </center>
+                     <right>
+                        <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="180.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button onAction="#onModelButton" text="Model image" />
+                              <Button onAction="#onSkinButton" text="Skin image" />
+                           </children>
+                           <BorderPane.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </BorderPane.margin></HBox>
+                     </right>
+                  </BorderPane>
                </children>
             </StackPane>
          </bottom>
@@ -70,10 +93,8 @@
       
                     <Button onAction="#onSelectFile" text="Select File" />
                     <Button onAction="#onSaveButton" text="Save" />
-                  <Button layoutX="83.0" layoutY="12.0" onAction="#onRecoverButton" text="Recover" />
                   <Pane fx:id="topSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
-                  <Button layoutX="128.0" layoutY="10.0" onAction="#onModelButton" text="Model image" />
-                  <Button layoutX="194.0" layoutY="10.0" onAction="#onSkinButton" text="Skin image" />
+                  <Button layoutX="83.0" layoutY="12.0" onAction="#onRecoverButton" text="Recover" />
                   </items>
                </ToolBar>
          </children>
