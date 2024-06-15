@@ -43,7 +43,7 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <left>
-                        <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="180.0" spacing="10.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="230.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDeleteButton" prefWidth="24.0" text="X" textFill="RED">
                                  <font>
@@ -70,8 +70,9 @@
                         </HBox>
                      </center>
                      <right>
-                        <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="180.0" spacing="10.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="230.0" spacing="10.0" BorderPane.alignment="CENTER">
                            <children>
+                              <CheckBox fx:id="slimBox" mnemonicParsing="false" onAction="#onSlimBox" text="Slim" />
                               <Button onAction="#onModelButton" text="Model image" />
                               <Button onAction="#onSkinButton" text="Skin image" />
                            </children>

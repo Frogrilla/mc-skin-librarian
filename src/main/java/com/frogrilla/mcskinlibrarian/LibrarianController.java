@@ -6,6 +6,7 @@ import com.google.gson.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -45,6 +46,8 @@ public class LibrarianController {
     private ImageView skinImage;
     @FXML
     private Pane topSpacer;
+    @FXML
+    private CheckBox slimBox;
 
     public void initialize() {
         HBox.setHgrow(topSpacer, Priority.SOMETIMES);
@@ -53,7 +56,12 @@ public class LibrarianController {
             int i = skinListView.getSelectionModel().getSelectedIndex();
             if(i < 0) return;
 
-            if(!skinListView.getItems().get(i).equals(b)) skinListView.getItems().set(i, b);
+            String newText = Objects.equals(b, "") ? "<unnamed skin>" : b;
+
+            if(!skinListView.getItems().get(i).equals(newText)){
+                skinListView.getItems().set(i, newText);
+                customSkins.get(i).name = b;
+            }
         });
 
         skinListView.getSelectionModel().selectedIndexProperty().addListener((observable, a, b) -> {
@@ -65,6 +73,8 @@ public class LibrarianController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Custom skin JSON", "launcher_custom_skins.json"));
         skinFile = fileChooser.showOpenDialog(LibrarianApplication.pStage);
+        // it literally works with my skin wtf
+        // ig
         if(skinFile == null) return;
         BufferedReader reader = new BufferedReader(new FileReader(skinFile));
         JsonObject object = gson.fromJson(reader, JsonObject.class).getAsJsonObject("customSkins");
@@ -75,8 +85,13 @@ public class LibrarianController {
         });
         customSkins.sort(new SkinDataComparator());
         skinListView.getItems().clear();
-        customSkins.forEach(skinData -> skinListView.getItems().add(skinData.name));
+        customSkins.forEach(skinData -> skinListView.getItems().add(Objects.equals(skinData.name, "") ? "<unnamed skin>" : skinData.name));
         reader.close();
+
+        if(!customSkins.isEmpty()) {
+            skinListView.getSelectionModel().select(0);
+            updateView();
+        }
 
         loaded = true;
     }
@@ -88,7 +103,6 @@ public class LibrarianController {
         for(int i = 0; i < customSkins.size(); i++){
             SkinData skin = customSkins.get(i);
             skin.created = Instant.now().minusSeconds(i).toString();
-            skin.name = skinListView.getItems().get(i);
             if(Objects.equals(skin.capeId, "")) skin.capeId = null;
             skin.id = "skin_" + (i+1);
             skinDataMap.add(skin.id, gson.toJsonTree(skin));
@@ -96,6 +110,7 @@ public class LibrarianController {
 
         JsonObject skinObject = new JsonObject();
         skinObject.add("customSkins", skinDataMap);
+        skinObject.addProperty("version", 1);
         FileWriter writer = new FileWriter(skinFile);
         writer.write(gson.toJson(skinObject));
         writer.close();
@@ -214,6 +229,14 @@ public class LibrarianController {
     }
 
     @FXML
+    protected void onSlimBox() {
+        int i = skinListView.getSelectionModel().getSelectedIndex();
+        if(i < 0) return;
+
+        customSkins.get(i).slim ^= true;
+    }
+
+    @FXML
     protected void onModelButton() throws IOException {
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
@@ -266,7 +289,7 @@ public class LibrarianController {
             return;
         }
 
-        skinName.setText(skinListView.getItems().get(i));
+        skinName.setText(customSkins.get(i).name);
         byte[] modelBytes = Base64.getDecoder().decode(customSkins.get(i).modelImage.replace("data:image/png;base64,", "").replace("\\u003d", ""));
         Image imageM = new Image(new ByteArrayInputStream(modelBytes));
         modelImage.setImage(imageM);
@@ -278,6 +301,7 @@ public class LibrarianController {
         modelImage.setVisible(true);
         skinImage.setVisible(true);
         skinName.setDisable(false);
+        slimBox.setSelected(customSkins.get(i).slim);
     }
 
     public void processKeyPress(KeyEvent event) {
