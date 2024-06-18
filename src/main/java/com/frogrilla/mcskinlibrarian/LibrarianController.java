@@ -36,6 +36,9 @@ public class LibrarianController {
     private boolean loaded = false;
     public RecoverController recoverController;
 
+    private Stage recoverStage;
+    private Stage shortcutStage;
+
     @FXML
     public ListView<String> skinListView;
     @FXML
@@ -157,7 +160,7 @@ public class LibrarianController {
         int i = skinListView.getSelectionModel().getSelectedIndex();
         if(i < 0) return;
 
-        if(recoverController != null && recoverController.open) recoverController.recoverList.getItems().add(skinListView.getItems().get(i));
+        if(recoverStage != null) recoverController.recoverList.getItems().add(skinListView.getItems().get(i));
 
         deletedSkins.add(customSkins.get(i));
         customSkins.remove(i);
@@ -212,20 +215,24 @@ public class LibrarianController {
 
     @FXML
     protected void onRecoverButton() throws IOException {
-        if(recoverController != null && recoverController.open) return;
+        if(recoverStage != null) {
+            recoverStage.toFront();
+            recoverStage.requestFocus();
+            recoverStage.show();
+            return;
+        }
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("recover-view.fxml"));
         Parent root = fxmlLoader.load();
         recoverController = fxmlLoader.getController();
         Scene scene = new Scene(root, 600, 400);
-        Stage stage = new Stage();
-        stage.setTitle("Recover skins");
+        recoverStage = new Stage();
+        recoverStage.setTitle("Recover skins");
         deletedSkins.forEach(skinData -> recoverController.recoverList.getItems().add(skinData.name));
         scene.setOnKeyPressed(recoverController::processKeyPress);
-        stage.setOnHidden(recoverController::shutdown);
         recoverController.library = this;
-        stage.setScene(scene);
-        stage.show();
+        recoverStage.setScene(scene);
+        recoverStage.show();
     }
 
     @FXML
@@ -269,14 +276,20 @@ public class LibrarianController {
 
     @FXML
     protected void onShortcutButton() throws IOException {
+        if(shortcutStage != null) {
+            shortcutStage.toFront();
+            shortcutStage.requestFocus();
+            shortcutStage.show();
+            return;
+        }
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("shortcut-view.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root, 600, 400);
-        Stage stage = new Stage();
-        stage.setTitle("Librarian Shorcuts");
-        stage.setScene(scene);
-        stage.show();
+        shortcutStage = new Stage();
+        shortcutStage.setTitle("Librarian Shorcuts");
+        shortcutStage.setScene(scene);
+        shortcutStage.show();
     }
 
     public void updateView(){

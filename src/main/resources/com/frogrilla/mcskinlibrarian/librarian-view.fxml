@@ -15,9 +15,9 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="300.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="0.0" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="modelImage" fitHeight="384.0" fitWidth="288.0" pickOnBounds="true" preserveRatio="true" scaleX="1.5" scaleY="1.5">
+                  <ImageView fx:id="modelImage" fitHeight="576.0" fitWidth="432.0" pickOnBounds="true">
                      <effect>
                         <DropShadow spread="0.2">
                            <color>
@@ -26,7 +26,7 @@
                         </DropShadow>
                      </effect>
                   </ImageView>
-                  <ImageView fx:id="skinImage" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" scaleX="7.0" scaleY="7.0">
+                  <ImageView fx:id="skinImage" fitHeight="384.0" fitWidth="384.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <effect>
                         <DropShadow spread="0.2">
                            <color>

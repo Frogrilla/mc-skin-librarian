@@ -18,14 +18,8 @@ public class RecoverController {
     protected ListView<String> recoverList;
 
     public LibrarianController library;
-    public boolean open = false;
-
-    public void shutdown(Event event){
-        open = false;
-    }
 
     public void initialize(){
-        open = true;
         VBox.setVgrow(recoverList, Priority.ALWAYS);
     }
     @FXML
@@ -57,10 +51,13 @@ public class RecoverController {
         switch(event.getCode()){
             case E:
                 addButton();
+                break;
             case X:
                 if(event.isControlDown()) deleteButton();
+                break;
             case C:
                 if(event.isControlDown()) clearButton();
+                break;
         }
     }
 }
