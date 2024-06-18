@@ -67,15 +67,17 @@ dependencies {
 test {
 useJUnitPlatform()}
 
-//jar {
-//    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-//
-//  manifest {
-//    attributes(
-//            'Main-Class': 'com.frogrilla.mcskinlibrarian.Launcher'
-//    )
-//  }
-//    from {
-//        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-//    }
-//}
+// Comment out to run in IDE - Don't comment out when building
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+  manifest {
+    attributes(
+            'Main-Class': 'com.frogrilla.mcskinlibrarian.Launcher'
+    )
+  }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
