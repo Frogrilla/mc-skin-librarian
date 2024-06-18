@@ -42,6 +42,8 @@ public class RecoverController {
         library.skinListView.getItems().add(library.deletedSkins.get(i).name);
         library.deletedSkins.remove(i);
         recoverList.getItems().remove(i);
+
+        library.saveText.setVisible(true);
     }
 
     @FXML

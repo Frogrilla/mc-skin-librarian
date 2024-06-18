@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -46,9 +47,12 @@ public class LibrarianController {
     private Pane topSpacer;
     @FXML
     private CheckBox slimBox;
+    @FXML
+    public Label saveText;
 
     public void initialize() {
         HBox.setHgrow(topSpacer, Priority.SOMETIMES);
+        saveText.setVisible(false);
 
         skinName.textProperty().addListener((observable, a, b) -> {
             int i = skinListView.getSelectionModel().getSelectedIndex();
@@ -113,6 +117,8 @@ public class LibrarianController {
         FileWriter writer = new FileWriter(skinFile);
         writer.write(gson.toJson(skinObject));
         writer.close();
+
+        saveText.setVisible(true);
     }
 
     @FXML
@@ -131,6 +137,8 @@ public class LibrarianController {
 
         skinListView.scrollTo(i-1);
         skinListView.getSelectionModel().select(i-1);
+
+        saveText.setVisible(false);
     }
 
     @FXML
@@ -149,6 +157,8 @@ public class LibrarianController {
 
         skinListView.scrollTo(i+1);
         skinListView.getSelectionModel().select(i+1);
+
+        saveText.setVisible(false);
     }
 
     @FXML
@@ -164,6 +174,7 @@ public class LibrarianController {
         skinListView.getSelectionModel().select(Math.min(i, skinListView.getItems().size()-1));
 
         updateView();
+        saveText.setVisible(false);
     }
 
     @FXML
@@ -206,7 +217,9 @@ public class LibrarianController {
         customSkins.add(i+1, cloneData);
         skinListView.getItems().add(i+1, duplicateName);
         skinListView.getSelectionModel().select(i+1);
+
         updateView();
+        saveText.setVisible(false);
     }
 
     @FXML
@@ -238,6 +251,7 @@ public class LibrarianController {
         if(i < 0) return;
 
         customSkins.get(i).slim ^= true;
+        saveText.setVisible(false);
     }
 
     @FXML
@@ -252,6 +266,7 @@ public class LibrarianController {
         customSkins.get(i).modelImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(Files.readAllBytes(imageFile.toPath())));
 
         updateView();
+        saveText.setVisible(false);
     }
 
     @FXML
@@ -268,6 +283,7 @@ public class LibrarianController {
         if(image.getWidth() == 64 && (image.getHeight() == 32 || image.getHeight() == 64)){
             customSkins.get(i).skinImage = "data:image/png;base64," + new String(Base64.getEncoder().encode(imageBytes));
             updateView();
+            saveText.setVisible(false);
         }
     }
 

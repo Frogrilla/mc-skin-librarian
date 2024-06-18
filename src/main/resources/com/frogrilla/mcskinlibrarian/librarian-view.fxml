@@ -94,6 +94,7 @@
       
                     <Button onAction="#onSelectFile" text="Select File" />
                     <Button onAction="#onSaveButton" text="Save" />
+                  <Label fx:id="saveText" text="changes saved" textFill="#717171" />
                   <Pane fx:id="topSpacer" maxWidth="1.7976931348623157E308" prefHeight="0.0" />
                   <Button layoutX="83.0" layoutY="12.0" onAction="#onRecoverButton" text="Recover" />
                   <Button layoutX="132.0" layoutY="10.0" onAction="#onShortcutButton" text="Shortcuts" />
