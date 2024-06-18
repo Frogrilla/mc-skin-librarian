@@ -43,7 +43,7 @@ public class RecoverController {
         library.deletedSkins.remove(i);
         recoverList.getItems().remove(i);
 
-        library.saveText.setVisible(true);
+        library.saveText.setVisible(false);
     }
 
     @FXML
