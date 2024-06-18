@@ -1,18 +1,15 @@
 package com.frogrilla.mcskinlibrarian;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import com.google.gson.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -22,8 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.attribute.BasicFileAttributeView;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.time.Instant;
 import java.util.*;
 
@@ -68,6 +63,7 @@ public class LibrarianController {
         });
 
         skinListView.getSelectionModel().selectedIndexProperty().addListener((observable, a, b) -> {
+            System.out.println("AHDJSAHD");
             updateView();
         });
     }
@@ -231,6 +227,7 @@ public class LibrarianController {
         deletedSkins.forEach(skinData -> recoverController.recoverList.getItems().add(skinData.name));
         scene.setOnKeyPressed(recoverController::processKeyPress);
         recoverController.library = this;
+        recoverStage.setResizable(false);
         recoverStage.setScene(scene);
         recoverStage.show();
     }
@@ -288,6 +285,7 @@ public class LibrarianController {
         Scene scene = new Scene(root, 600, 400);
         shortcutStage = new Stage();
         shortcutStage.setTitle("Librarian Shorcuts");
+        shortcutStage.setResizable(false);
         shortcutStage.setScene(scene);
         shortcutStage.show();
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <VBox fx:id="recover" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.frogrilla.mcskinlibrarian.RecoverController">
@@ -12,6 +13,11 @@
             <Button layoutX="72.0" layoutY="12.0" mnemonicParsing="false" onAction="#clearButton" text="Clear All" />
         </items>
       </ToolBar>
-      <ListView fx:id="recoverList" />
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <ListView fx:id="recoverList" maxWidth="200.0" minWidth="-Infinity" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <ImageView fx:id="recoverImage" fitHeight="384.0" fitWidth="384.0" pickOnBounds="true" preserveRatio="true" smooth="false" />
+         </children>
+      </HBox>
    </children>
 </VBox>
