@@ -1,3 +1,5 @@
+NEW VERSION -> https://github.com/Frogrilla/mc-skin-manager
+
 ## Mc Skin Librarian
 
 Mc Skin Librarian is a java application which allows finer control over your Minecraft launcher's skin library.
